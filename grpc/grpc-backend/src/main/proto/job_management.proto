@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package jobmanagement;
+
+service JobService {
+  rpc ListAllJobs (Empty) returns (JobList) {}
+  rpc GetJobDetails (JobId) returns (JobDetails) {}
+}
+
+message Job {
+  string jobId = 1;
+  string jobName = 2;
+  JobStatus jobStatus = 3;
+  string createdAt = 4;
+}
+
+enum JobStatus {
+  SUBMITTED = 0;
+  RUNNING = 1;
+  COMPLETED = 2;
+}
+
+message JobList {
+  repeated Job jobs = 1;
+}
+
+message JobId {
+  string id = 1;
+}
+
+message JobDetails {
+  string jobId = 1;
+  string jobName = 2;
+  JobStatus jobStatus = 3;
+  string createdAt = 4;
+}
+
+message Empty {}
